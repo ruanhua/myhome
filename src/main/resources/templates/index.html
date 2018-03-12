@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <title th:text="支付"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<header th:replace="top :: header"></header>
+<div class="main">
+    <div class="content">
+        <div class="fold" id="fold"></div>
+        <header th:replace="left :: header"></header>
+        <div class="rightbox fr">
+            <div class="heading">支付</div>
+            <div class="query white">
+            </div>
+        </div>
+    </div>
+</div>
+<header th:replace="footer :: header"></header>
+</body>
+</html>

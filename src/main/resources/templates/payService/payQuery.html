@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <title th:text="支付查询"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<header th:replace="top :: header"></header>
+<link rel="stylesheet" th:href="@{/css/datagrid.css}"/>
+<link rel="stylesheet" th:href="@{/css/kkpager_blue.css}"/>
+<link rel="stylesheet" th:href="@{/css/tables.css}"/>
+<script type="text/JavaScript" th:inline="javascript" th:src="@{/js/kkpager.js}"></script>
+<script type="text/JavaScript" th:inline="javascript" th:src="@{/js/jquery-ui.datepicker-zh-CN.js}"></script>
+<script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common.js}"></script>
+<script type="text/JavaScript" th:inline="javascript" th:src="@{/js/pay/payquery.js}"></script>
+<!--主菜单-->
+<div class="main">
+    <div class="content">
+        <header th:replace="left :: header"></header>
+        <div class="rightbox fr">
+            <div class="heading">支付查询</div>
+            <div class="query white">
+                <div class="container-box blacknone">
+                    <div class="">
+                        <div class="head clearfix">
+                            <form method="post" action="/payService/payQuery" name="payQueryForm" id="payQueryForm" style="margin-top: 5px; width: 95%;">
+                                <input type="hidden" name="pageNo" id="pageNo" value="1"/>
+                                <div class="policy-number box-margin fl">
+                                    <label for="">保单号</label>
+                                    <input type="text" id="policyNo" name="policyNo" th:value="${payQueryCondition.policyNo}"/>
+                                </div>
+                                <div class="flight-status box-margin fl">
+                                    <label for="">业务类型</label>
+                                    <select id="businessType" name="businessType" th:value="${payQueryCondition.businessType}">
+                                        <option value="">--请选择--</option>
+                                        <option th:selected="${payQueryCondition.businessType eq 'revise'}?'true':'false' "
+                                                value="revise">批改
+                                        </option>
+                                        <option th:selected="${payQueryCondition.businessType eq 'surrender'}?'true':'false' "
+                                                value="surrender">退保
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="flight-status box-margin fl">
+                                    <label for="">渠道</label>
+                                    <input type="hidden" name="channel_1" id="channel_1" th:value="${payQueryCondition.channel}"/>
+                                    <select id="channel" name="channel" th:value="${payQueryCondition.channel}">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+
+                                <div class="payment-status box-margin fl">
+                                    <label for="">支付状态</label>
+                                    <select id="payStatus" name="payStatus">
+                                        <option value="">全部</option>
+                                        <option th:selected="${payQueryCondition.payStatus eq '0'}?'true':'false' "
+                                                value="0">待支付
+                                        </option>
+                                        <option th:selected="${payQueryCondition.payStatus eq 'SUCCESS'}?'true':'false' "
+                                                value="SUCCESS">支付成功
+                                        </option>
+                                        <option th:selected="${payQueryCondition.payStatus eq 'FAIL'}?'true':'false' "
+                                                value="FAIL">支付失败
+                                        </option>
+                                        <option th:selected="${payQueryCondition.payStatus eq 'WAIT'}?'true':'false' "
+                                                value="WAIT">支付中
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="task-generate box-margin fl">
+                                    <label for="">支付日期</label>
+                                    <div class="int-box">
+                                        <input type="text" id="startDate" name="startDate"
+                                               th:value="${payQueryCondition.startDate}"/>
+                                        <span>到</span>
+                                        <input type="text" id="endDate" name="endDate"
+                                               th:value="${payQueryCondition.endDate}"/>
+                                    </div>
+                                </div>
+                                <div style="clear: both;height: 10px;"></div>
+                                <div class="btns-box clearfix">
+                                    <div style="width: 140px; margin: 0 auto">
+                                        <div class="query-btn" onclick="payQuery.search();">查询</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="datagrid">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>保单号</th>
+                                <th>批单号/理赔号</th>
+                                <th>投保人</th>
+                                <th>产品简称</th>
+                                <th>支付日期</th>
+                                <th>支付状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${payQueryResults != null}" th:each="payQueryResult:${payQueryResults}">
+                                <td>
+                                    <a th:href="@{'/initPayInput/'+${payQueryResult.payCaseNo}+'/'+${payQueryResult.operateStyle}}"
+                                       class="signOut">
+                                        <span th:text="${payQueryResult.policyNo}"/>
+                                    </a>
+                                </td>
+                                <td th:text="${payQueryResult.businessNo}"></td>
+                                <td th:text="${payQueryResult.holderName}"></td>
+                                <td th:text="${payQueryResult.productMetaName}"></td>
+                                <td th:text="${payQueryResult.payDate}"></td>
+                                <div th:switch="${payQueryResult.payStatus}">
+                                    <td th:case="'0'">待支付</td>
+                                    <td th:case="'SUCCESS'">支付成功</td>
+                                    <td th:case="'FAIL'">支付失败</td>
+                                    <td th:case="'WAIT'">支付中</td>
+                                </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="kkpager"></div>
+
+                </div>
+
+                <script th:inline="javascript">
+                    //生成分页控件
+                    /*<![CDATA[*/
+                    kkpager.generPageHtml({
+                        pno: /*[[${page.pageNum}]]*/,
+                        mode: 'click', //设置为click模式
+                        //总页码
+                        total: /*[[${page.pages}]]*/,
+                        //总数据条数
+                        totalRecords: /*[[${page.total}]]*/,
+                        //点击页码、页码输入框跳转、以及首页、下一页等按钮都会调用click
+                        //适用于不刷新页面，比如ajax
+                        click: function (n) {
+                            $("#pageNo").val(n);
+                            $("#payQueryForm").submit();
+                            this.selectPage(n);
+                        },
+                        //getHref是在click模式下链接算法，一般不需要配置，默认代码如下
+                        getHref: function (n) {
+                            return '#';
+                        }
+                    });
+                    /*]]>*/
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<header th:replace="footer :: header"></header>
+</body>
+</html>

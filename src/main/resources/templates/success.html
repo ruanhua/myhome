@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <title>提示信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<header th:replace="top :: header"></header>
+<link rel="stylesheet" th:href="@{/css/main.css}"/>
+<div class="main">
+    <div class="content">
+        <div class="fold" id="fold"></div>
+        <header th:replace="left :: header"></header>
+        <div class="rightbox fr">
+            <div class="heading">提示信息</div>
+            <div class="query white">
+                <form>
+                    <div class="sectionone clearfix">
+                        <table>
+                            <tr>
+                                <td th:text="提交成功！"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<header th:replace="footer :: header"></header>
+</body>
+</html>

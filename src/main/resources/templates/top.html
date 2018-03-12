@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/css/commonform.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-select.min.css}"/>
+
+    <!--[if lt IE 9]>
+    <script type="text/JavaScript" th:src="@{/js/libs/html5shiv.min.js}"></script>
+    <script type="text/JavaScript" th:src="@{/js/libs/respond.min.js}"></script>
+
+    <![endif]-->
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/jquery-ui.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/main.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/bootstrap.min.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/bootbox.min.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/leftNavLeft.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/bootstrap-select.min.js}"></script>
+</head>
+<body style="overflow:scroll;overflow-x:hidden">
+<header>
+    <div id="header" class="header">
+        <div class="logo" id="logo"><a href="index.html"><img th:src="@{/images/logo.png}"/></a></div>
+        <!--
+        <div class="otherapects fr" th:if="${userName != null}">
+            <div class="username fl">
+                <a th:href="@{/account/manage}" target="_blank"><i class="iconfont icon-loginuser"></i><span th:text="'欢迎您：'+ ${userName}"></span></a>
+            </div>
+            <div class="exit fl">
+                <a th:href="@{/account/logout}"><i class="iconfont icon-tuichu"></i>
+                    <span th:text="退出"></span>
+                </a>
+            </div>
+        </div>
+        -->
+    </div>
+</header>
+
+</body>
+</html>

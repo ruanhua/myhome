@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html xmlns:th="http://www.thymeleaf.org" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html xmlns:th="http://www.thymeleaf.org" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html xmlns:th="http://www.thymeleaf.org"><!--<![endif]-->
+<head>
+    <meta charset="UTF-8"/>
+    <title>支付录入</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<header th:replace="top :: header"></header>
+<script type="text/JavaScript" th:inline="javascript" th:src="@{/js/pay/payinput.js}">
+
+</script>
+<div class="main">
+    <div class="content">
+        <div class="fold" id="fold"></div>
+        <header th:replace="left :: header"></header>
+        <div class="rightbox fr">
+            <div class="heading">支付录入</div>
+            <div class="query white">
+                <form action="/payService/addPayCase" id="paymentFrom" name="paymentFrom" method="post" class="form-validate s-form-a report-form">
+                    <input type="hidden" name="payCaseNo" id="payCaseNo" th:value="${payCase.payCaseNo}"/>
+                    <input type="hidden" name="id" id="id" th:value="${payReceiver.id}"/>
+                    <input type="hidden" name="operateStyle" id="operateStyle" th:value="${operateStyle}"/>
+                    <input type="hidden" name="payStatus" id="payStatus" th:value="${payCase.payStatus}"/>
+                    <input type="hidden" name="channel" id="channel" th:value="${payCase.channel}"/>
+                    <input type="hidden" name="sendCallBackStatus" id="sendCallBackStatus" th:value="${payCase.sendCallBackStatus}"/>
+                    <div class="show-wrap">
+                        <p>基本信息</p>
+                        <div class="edit clearfix">
+                            <div class="form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>保单号：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="policyNo" id="policyNo" th:value="${payCase.policyNo}" readonly="true" style="border: none"/>
+                                </div>
+                            </div>
+                            <div class="form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>批单号/理算号：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="businessNo" id="businessNo"  th:value="${payCase.businessNo}" readonly="true" style="border: none"/>
+                                </div>
+                            </div>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>投保人：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="holderName" id="holderName" th:value="${payCase.holderName}" readonly="true" style="border: none"/>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+
+                            <div class="form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>产品简称：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="productMetaName" id="productMetaName" th:value="${payCase.productMetaName}" readonly="true" style="border: none"/>
+                                </div>
+                            </div>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>实付金额：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="tradeAmount" id="tradeAmount" th:value="${payCase.tradeAmount}" readonly="true" style="border: none"/>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="edit clearfix">
+                            <p>账户信息填写</p>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>户名：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="accountName" id="accountName"  th:value="${payReceiver.accountName}"/>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>帐号：</label>
+                                </div>
+                                <div class="formbox input-text">
+                                    <input type="text" name="accountNo" id="accountNo" th:value="${payReceiver.accountNo}"/>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>支付类型：</label>
+                                </div>
+                                <div th:if="${operateStyle == 'nextStep'}">
+                                    <div class="formbox input-text">
+                                        <input type="text" name="payTypeName" id="payTypeName"  th:value="${payReceiver.payTypeName}"/>
+                                        <input type="hidden" name="payType" id="payType" th:value="${payReceiver.payType}"/>
+                                    </div>
+                                </div>
+                                <div th:if="${operateStyle != 'nextStep'}">
+                                    <div class="formbox select-control">
+                                        <select id="payType" name="payType">
+                                            <option value="0">实时</option>
+                                            <option th:selected="${payReceiver.payType eq '1'}?'true':'false' "
+                                                    value="1">非实时
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                            <div class=" form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>开户城市：</label>
+                                </div>
+                                <div class="formbox select-control areaStyle">
+                                    <div th:if="${operateStyle == 'nextStep'}">
+                                        <input type="text" name="provinceName" id="provinceName"  th:value="${payReceiver.provinceName}"/>
+                                        <input type="hidden" name="provinceCode" id="provinceCode" th:value="${payReceiver.provinceCode}"/>
+                                    </div>
+                                    <div th:if="${operateStyle != 'nextStep'}">
+                                        <input type="hidden" name="provinceCode_1" id="provinceCode_1" th:value="${payReceiver.provinceCode}"/>
+                                        <select name="provinceCode" id="provinceCode">
+                                            <option value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="formbox select-control areaCityStyle">
+                                    <div th:if="${operateStyle == 'nextStep'}">
+                                        <input type="text" name="cityName" id="cityName"  th:value="${payReceiver.cityName}"/>
+                                        <input type="hidden" name="cityCode" id="cityCode" th:value="${payReceiver.cityCode}"/>
+                                    </div>
+                                    <div th:if="${operateStyle != 'nextStep'}">
+                                        <input type="hidden" name="cityCode_1" id="cityCode_1" th:value="${payReceiver.cityCode}"/>
+                                        <select name="cityCode" id="cityCode">
+                                            <option value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-group selecttwo">
+                                <div class="label-control">
+                                    <em>*</em>
+                                    <label>开户行：</label>
+                                </div>
+                                <div class="formbox select-control">
+                                    <div th:if="${operateStyle == 'nextStep'}">
+                                        <input type="text" name="bankName" id="bankName"  th:value="${payReceiver.bankName}"/>
+                                        <input type="hidden" name="bankCode" id="bankCode" th:value="${payReceiver.bankCode}"/>
+                                    </div>
+                                    <div th:if="${operateStyle != 'nextStep'}">
+                                        <input type="hidden" id="bank_Code" th:value="${payReceiver.bankCode}"  />
+                                        <select id="bankCode" name="bankCode" class="selectpicker show-tick form-control bs-select-hidden" data-live-search="true">
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="submitWrap">
+                            <div class="submit nextSubmit">
+                                <input type="button" id="nextBtn" class="clearfix" value="下一步" onclick="payInput.submitNextStep()"/>
+                            </div>
+                            <div class="submit gobackBtn">
+                                <input type="button" id="goBackBtn" class="clearfix" value="上一步" onclick="payInput.goBack()"/>
+                                <input type="button" onclick="payInput.submit()" class="clearfix"  id="submitBtn" name="submitBtn" value="提交"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<header th:replace="footer :: header"></header>
+</body>
+</html>

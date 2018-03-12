@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <title>出错信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}"/>
+
+    <!--[if lt IE 9]>
+    <script type="text/JavaScript" th:src="@{/js/libs/html5shiv.min.js}"></script>
+    <script type="text/JavaScript" th:src="@{/js/libs/respond.min.js}"></script>
+    <![endif]-->
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/jquery.min.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/jquery.validate.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/main.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/bootstrap.min.js}"></script>
+    <script type="text/JavaScript" th:inline="javascript" th:src="@{/js/common/bootbox.min.js}"></script>
+    <style>
+        * { margin: 0; padding: 0;}
+        body { background-color: #f2f2f2; padding: 15px;}
+        .con { text-align: center;}
+        .con img { margin: 100px 0; max-width: 100%}
+        .con span { color: #0BBF74;}
+        p { font-size: 20px; line-height: 1.5;}
+        a { background-color: #0BBF74; color: #fff; font-size: 14px; padding: .5em 1.5em; border-radius: 4px;
+            text-decoration: none; display: inline-block; vertical-align: bottom; line-height: 1.3;}
+        a:focus { outline: none}
+    </style>
+</head>
+<body>
+<div class="con">
+    <img th:src="@{/images/500.png}"/>
+    <p><span><span id="time">5</span>s</span>后自动返回！<a th:href="@{/}" th:text="返回首页"></a></p>
+</div>
+<script>
+    /*<![CDATA[*/
+    var oTime = document.getElementById('time');
+    var time = oTime.innerHTML;
+    setInterval(function() {
+        time--;
+        oTime.innerHTML = time;
+        if(time <= 0) {
+            window.location.href = '/payService';
+        }
+    },1000)
+    /*]]>*/
+</script>
+</body>
+</html>

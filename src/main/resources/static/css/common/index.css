@@ -1,0 +1,123 @@
+*{
+	padding:0;
+	margin:0;
+}
+ul li{
+	list-style: none;
+}
+.container-box{
+	width:100%;
+	background:#F5F7F9;
+}
+.head{
+	width:100%;
+	height:60px;
+	background:#fff;
+	line-height: 60px;
+	font-size: 14px;
+	box-shadow: 0 0 5px #ccc;
+}
+.head span{
+	color:#495060;
+}
+.logo{
+	width: 16%;
+	height: 100%;
+	text-align: right;
+}
+.logo img{
+	margin-top: 15px;
+}
+.edit-password{
+	margin-right: 20px;
+}
+.exit{
+	margin-right:20px;
+}
+.username{
+	margin-right: 20px;
+}
+.content-box{
+	width: 100%;
+}
+.center{
+	width:96%;
+	margin-top:2px;
+	background:#fff;
+	margin-left: 2%;
+	padding-bottom: 150px;
+}
+.left{
+	width:18%;
+	background:#fff;
+	border-right: 1px solid #DDDEE1;
+}
+.title-box .title{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color:#495060;
+	cursor: pointer;
+	font-size: 14px;
+}
+.title-box .title:hover{
+	background:#f3f3f3;
+	transition: all 600ms;
+}
+.title-box ul li{
+	background:#fff;
+	cursor: pointer;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color:#495060;
+	font-size: 14px;
+}
+.title-box ul li:hover{
+	background:#f3f3f3;
+	transition: all 600ms;
+}
+.title .bootom-icon{
+	position: absolute;
+	font-size: 20px;
+}
+/*.bottom-rotate .bootom-icon{
+	transform:rotate(45deg);
+	-ms-transform:rotate(45deg); 	
+	-moz-transform:rotate(45deg); 	
+	-webkit-transform:rotate(45deg); 
+	-o-transform:rotate(45deg); 	
+}*/
+.right{
+	width: 81%;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+.title-box .right-border{
+	border-right: 1px solid #2D8CF0;
+	color:#2D8CF0;
+}
+.footer{
+	width: 100%;
+	text-align: center;
+	color:#9EA7B4;
+	font-size: 12px;
+}
+.footer p{
+	margin-top: 15px;
+}
+.footer p:nth-last-child(1){
+	padding-bottom: 15px;
+}
