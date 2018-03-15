@@ -3,19 +3,13 @@
 <header>
     <div class="leftbox sidebar fl" id="sidebar">
         <ul class="nav_left">
-            <!--
             <li th:if="${menus != null}" th:each="menu:${menus}">
-                <a th:if="${menu.name == '支付'}" href="javascript:" class="nav_one arrow_right" th:text="${menu.name}"></a>
-                <a th:unless="${menu.name == '支付'}" th:href="${menu.url}" class="nav_one arrow_right" th:text="${menu.name}"></a>
-                <ul th:if="${menu.name == '支付'}" class="nav-two">
-                    <li th:if="${menu.menuItems != null}" th:each="menuItem:${menu.menuItems}">
-                        <a th:href="${menuItem.url}" th:text="${menuItem.name}" class="leftText">
-                            <i class="iconfont icon-fanhui-copy-copy"></i>
-                        </a>
-                    </li>
-                </ul>
+                <li th:if="${menu.menuItems != null}" th:each="menuItem:${menu.menuItems}">
+                    <a th:href="${menuItem.url}" th:text="${menuItem.name}" class="leftText">
+                        <i class="iconfont icon-fanhui-copy-copy"></i>
+                    </a>
+                </li>
             </li>
-            -->
         </ul>
     </div>
 </header>

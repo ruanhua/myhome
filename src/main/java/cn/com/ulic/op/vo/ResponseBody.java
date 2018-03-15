@@ -9,15 +9,6 @@ public class ResponseBody {
 
     private String retCode;
     private String retMsg;
-    private List<BigCompensate> bigCompensateList;
-
-    public List<BigCompensate> getBigCompensateList() {
-        return bigCompensateList;
-    }
-
-    public void setBigCompensateList(List<BigCompensate> bigCompensateList) {
-        this.bigCompensateList = bigCompensateList;
-    }
 
     public String getRetCode() {
         return retCode;

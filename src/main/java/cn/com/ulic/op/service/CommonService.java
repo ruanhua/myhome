@@ -1,6 +1,5 @@
 package cn.com.ulic.op.service;
 
-import cn.com.ulic.op.domain.Area;
 import cn.com.ulic.op.domain.Code;
 import cn.com.ulic.op.util.MyException;
 import cn.com.ulic.op.vo.Condition;
@@ -16,16 +15,6 @@ public interface CommonService {
 
     public String getLocalIP();
 
-    public List<Area> getAreas(Condition condition);
-
-    Area getArea(Integer id);
-
-    String getAreaName(Integer id);
-
     public List<Code> getCodes(Condition condition);
-
-    Code getCode(String type,String unionCode);
-
-    String getCodeName(String type,String unionCode);
 
 }

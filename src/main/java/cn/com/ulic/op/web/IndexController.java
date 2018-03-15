@@ -20,8 +20,8 @@ public class IndexController {
 
     @RequestMapping("/")
     public String getHome(HttpServletRequest request, ModelMap map){
-//        List<Menu> menus = menuService.getFrontendMenus();
-//        map.addAttribute("menus", menus);
+        List<Menu> menus = menuService.getFrontendMenus();
+        map.addAttribute("menus", menus);
         return "index";
     }
 

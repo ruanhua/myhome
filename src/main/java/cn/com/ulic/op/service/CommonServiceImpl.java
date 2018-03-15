@@ -1,9 +1,7 @@
 package cn.com.ulic.op.service;
 
-import cn.com.ulic.op.dao.AreaMapper;
 import cn.com.ulic.op.dao.CodeMapper;
 import cn.com.ulic.op.dao.ConfigMapper;
-import cn.com.ulic.op.domain.Area;
 import cn.com.ulic.op.domain.Code;
 import cn.com.ulic.op.domain.Config;
 import cn.com.ulic.op.util.DateUtil;
@@ -25,9 +23,6 @@ public class CommonServiceImpl implements CommonService {
 
     @Autowired
     private ConfigMapper configMapper;
-
-    @Autowired
-    private AreaMapper areaMapper;
 
     @Autowired
     private CodeMapper codeMapper;
@@ -64,40 +59,8 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public List<Area> getAreas(Condition condition) {
-        return areaMapper.getAreas(condition);
-    }
-
-    @Override
-    public Area getArea(Integer id) {
-        return areaMapper.getArea(id);
-    }
-
-    @Override
-    public String getAreaName(Integer id) {
-        Area area = areaMapper.getArea(id);
-        if(area != null){
-            return area.getName();
-        }
-        return null;
-    }
-
-    @Override
     public List<Code> getCodes(Condition condition) {
         return codeMapper.queryCode(condition);
     }
 
-    @Override
-    public Code getCode(String type, String unionCode) {
-        return codeMapper.getCode(type,unionCode);
-    }
-
-    @Override
-    public String getCodeName(String type, String unionCode) {
-        Code code = codeMapper.getCode(type,unionCode);
-        if(code != null){
-            return code.getUnionname();
-        }
-        return null;
-    }
 }

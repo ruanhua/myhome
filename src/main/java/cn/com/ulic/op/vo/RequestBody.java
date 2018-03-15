@@ -13,8 +13,6 @@ public class RequestBody {
 
     private String req_time;
 
-    private List<String> bigCompensateNoList;
-
     public String getSalt() {
         return salt;
     }
@@ -37,13 +35,5 @@ public class RequestBody {
 
     public void setReq_time(String req_time) {
         this.req_time = req_time;
-    }
-
-    public List<String> getBigCompensateNoList() {
-        return bigCompensateNoList;
-    }
-
-    public void setBigCompensateNoList(List<String> bigCompensateNoList) {
-        this.bigCompensateNoList = bigCompensateNoList;
     }
 }

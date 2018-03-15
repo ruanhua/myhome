@@ -14,18 +14,18 @@ import java.util.List;
 @Mapper
 public interface MenuMapper {
     //PC前端菜单
-    @Select("SELECT id menuID, name, fbType, concat(URLPrefix,URL) url, status FROM cs_op_menu where clientType = 2 and fbType = 0 and parentMenu is null")
+    @Select("SELECT id menuID, name, fbType, concat(URLPrefix,URL) url, status FROM menu where clientType = 2 and fbType = 0 and parentMenu is null")
     List<MenuItem> getFrontendRootMenuItems();
 
-    @Select("SELECT id menuID, name, fbType, URL url, status FROM cs_op_menu where clientType = 2 and fbType = 0 and parentMenu is not null")
+    @Select("SELECT id menuID, name, fbType, URL url, status FROM menu where clientType = 2 and fbType = 0 and parentMenu is not null")
     public List<MenuItem> getFrontendSubmenuItems();
 
-    @Select("SELECT id menuID, name, fbType, URL url, status FROM cs_op_menu where clientType = 2 and fbType = 0 and parentMenu = #{parentMenu}")
+    @Select("SELECT id menuID, name, fbType, URL url, status FROM menu where clientType = 2 and fbType = 0 and parentMenu = #{parentMenu}")
     public List<MenuItem> getFrontendSubmenuItemsByParentMenuID(@Param("parentMenu") Integer parentMenu);
 
-    @Select("SELECT id menuID, name, fbType, URL url, status FROM cs_op_menu where clientType = 0 and fbType = 0 and parentMenu is not null")
+    @Select("SELECT id menuID, name, fbType, URL url, status FROM menu where clientType = 0 and fbType = 0 and parentMenu is not null")
     public List<MenuItem> getMobileFrontendSubmenuItems();
 
-    @Select("SELECT id menuID, name, fbType, URL url, status FROM cs_op_menu where clientType = 0 and fbType = 0 and parentMenu = #{parentMenu}")
+    @Select("SELECT id menuID, name, fbType, URL url, status FROM menu where clientType = 0 and fbType = 0 and parentMenu = #{parentMenu}")
     public List<MenuItem> getMobileFrontendSubmenuItemsByParentMenuID(@Param("parentMenu") Integer parentMenu);
 }
