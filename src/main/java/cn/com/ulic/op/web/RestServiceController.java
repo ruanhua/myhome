@@ -37,8 +37,8 @@ public class RestServiceController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/queryCode", method = RequestMethod.POST)
-    public List<Code> queryCode(@RequestBody Condition condition) {
-        List<Code> codes = commonService.getCodes(condition);
+    public List<Code> queryCode(@RequestBody UserCondition userCondition) {
+        List<Code> codes = null;
         return codes;
     }
 

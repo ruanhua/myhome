@@ -1,6 +1,7 @@
 package cn.com.ulic.op.web;
 
 import cn.com.ulic.op.domain.Menu;
+import cn.com.ulic.op.domain.User;
 import cn.com.ulic.op.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class IndexController {
     public String getHome(HttpServletRequest request, ModelMap map){
         List<Menu> menus = menuService.getFrontendMenus();
         map.addAttribute("menus", menus);
+        map.addAttribute("user", new User());
         return "index";
     }
 
